@@ -1,9 +1,11 @@
-{ lib, pkgs, inputs, ... }:
-
+{ self, lib, pkgs, inputs, ... }:
+let
+	flakeRoot = self;
+in
 {
 	imports =
 		[
-			./hardware-configuration.nix
+			./../../../hardware/hardware-configuration.nix
 			#inputs.home-manager.nixosModules.default
 		];
 	
@@ -17,7 +19,6 @@
 	nixpkgs.config.allowUnfree = true;
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
 
 	boot = {
 		kernelPackages = pkgs.linuxPackages_zen;

@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }: {
+{ pkgs, self, ... }: 
+let
+	flakeRoot = self;
+	dotfilesRoot = flakeRoot + /dotfiles;
+in
+{
 	home = {
 		username = "ropptar";
 		homeDirectory = "/home/ropptar";
@@ -31,10 +36,10 @@
 
 		file = {
 			".bashrc" = {
-				source = ./../.bashrc;
+				source = flakeRoot + dotfiles/.bashrc;
 			};
 			".config/hypr" = {
-				source = ./../hypr;
+				source = flakeRoot + dotfiles/hypr;
 			};
 		};	
 	};

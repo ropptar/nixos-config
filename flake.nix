@@ -11,17 +11,24 @@
 		};
 	};
 
-	outputs = {nixpkgs, home-manager, ...} @ inputs:
+	outputs = {self, nixpkgs, home-manager, ...} @ inputs:
 		let
 			lib = nixpkgs.lib;
 		in {
 			nixosConfigurations = {
 				ropptar-XPS-13-9310 = lib.nixosSystem {
-					#extraSpecialArgs = {inherit inputs;};
+					specialArgs = {inherit self;};
 					system = "x86_64-linux";
 					modules = [
-						./configuration.nix
-						home-manager.nixosModules.default
+						./profiles/desktop/home/configuration.nix
+						home-manager.nixosModules.home-manager
+						{
+							home-manager.extraSpecialArgs = {inherit self;};
+							home-manager.useUserPackages = true;
+							home-manager.useGlobalPkgs = true;
+							home-manager.backupFileExtension = "backup";
+							home-manager.users.ropptar = import profiles/desktop/home/home.nix;
+						}
 					];
 				};
 			};
