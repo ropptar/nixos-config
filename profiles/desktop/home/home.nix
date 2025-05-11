@@ -1,6 +1,6 @@
 { pkgs, self, ... }: 
 let
-	flakeRoot = self;
+	flakeRoot = ./../../..;
 	dotfilesRoot = flakeRoot + /dotfiles;
 in
 {
@@ -36,10 +36,10 @@ in
 
 		file = {
 			".bashrc" = {
-				source = flakeRoot + dotfiles/.bashrc;
+				source = ./../../../dotfiles/.bashrc;
 			};
 			".config/hypr" = {
-				source = flakeRoot + dotfiles/hypr;
+				source = ./../../../dotfiles/hypr;
 			};
 		};	
 	};
@@ -90,3 +90,4 @@ in
 
 	};
 }
+
