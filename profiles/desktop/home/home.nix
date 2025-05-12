@@ -35,12 +35,8 @@ in
 		];
 
 		file = {
-			".bashrc" = {
-				source = ./../../../dotfiles/.bashrc;
-			};
-			".config/hypr" = {
-				source = ./../../../dotfiles/hypr;
-			};
+			".bashrc".source = ./../../../dotfiles/.bashrc;
+			".config/hypr".source = ./../../../dotfiles/hypr;
 		};	
 	};
 	
