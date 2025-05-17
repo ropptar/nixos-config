@@ -5,16 +5,10 @@ in
 {
 	imports =
 		[
-			./../../../hardware/hardware-configuration.nix
+			./hardware-configuration.nix
 			#inputs.home-manager.nixosModules.default
 		];
 	
-	home-manager = {
-		useUserPackages = true;
-		useGlobalPkgs = true;
-		backupFileExtension = "backup";
-		users.ropptar = import ./home.nix;
-	};
 
 	nixpkgs.config.allowUnfree = true;
 
@@ -33,7 +27,7 @@ in
 	};
 	
 	networking = {
-		hostName = "ropptar-XPS-13-9310"; 
+		hostName = "XPS-13-9310"; 
 		networkmanager.enable = true;  
 		firewall.enable = false;
 	};
@@ -66,6 +60,8 @@ in
 		hyprland = {
 		  enable = true;
 		};
+		
+		bash.shellAliases.rebash = "source ~/dotfiles/.bashrc";
 	};
 	
 	environment = {

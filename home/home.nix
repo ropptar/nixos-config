@@ -5,7 +5,7 @@ let
 in
 {
 	imports = [
-		./programs/main.nix
+		./programs
 	];
 	home = {
 		username = "ropptar";
@@ -38,10 +38,13 @@ in
 		];
 
 		file = {
-			".bashrc".source = ./../../../dotfiles/.bashrc;
-			".config/hypr".source = ./../../../dotfiles/hypr;
+			".bashrc".source = ./../dotfiles/.bashrc;
+			".config/bash".source = ./../dotfiles/bash;
+			".config/hypr".source = ./../dotfiles/hypr;
 		};	
 	};
+
+	programs.home-manager.enable = true;
 	# gtk = {
 	# 	enable = true;
 

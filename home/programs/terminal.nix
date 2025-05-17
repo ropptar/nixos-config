@@ -1,27 +1,15 @@
-{ ... }:
-{
+{ ... }: {
 	programs = {
-		home-manager.enable = true;
-
-		
-		git = {
-			enable = true;
-			userName = "Alexander";
-			userEmail = "ropptar@ya.ru";
-			extraConfig = {
-				merge = {
-					tool = "meld";
-				};
-			};
-		};
-
 		foot = {
+		#####################
+		# The terminal itself
+		#####################
 			enable = true;
 			settings = {
 				main = {
 					font = "Hack Nerd Font:size=16";
 				};
-				colors = {
+			colors = {
 					background="282828";
 					foreground="ebdbb2";
 					regular0="282828";
@@ -43,6 +31,5 @@
 				};
 			};
 		};
-
 	};
 }
