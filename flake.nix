@@ -22,14 +22,14 @@
 					specialArgs = {inherit self;};
 					system = "x86_64-linux";
 					modules = [
-						./profiles/desktop/home/configuration.nix
+						./hosts/ropptar-XPS-13-9310
 						home-manager.nixosModules.home-manager
 						{
 							home-manager.extraSpecialArgs = {inherit self;};
 							home-manager.useUserPackages = true;
 							home-manager.useGlobalPkgs = true;
 							home-manager.backupFileExtension = "backup";
-							home-manager.users.ropptar = import profiles/desktop/home/home.nix;
+							home-manager.users.ropptar = import ./home
 						}
 					];
 				};

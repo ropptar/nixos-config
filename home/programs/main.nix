@@ -1,45 +1,5 @@
-{ pkgs, self, ... }: 
-let
-	flakeRoot = ./../../..;
-	dotfilesRoot = flakeRoot + /dotfiles;
-in
+{ ... }:
 {
-	home = {
-		username = "ropptar";
-		homeDirectory = "/home/ropptar";
-		stateVersion = "24.11";
-		
-		packages = with pkgs; [
-			# Dev
-			sourcegit
-			meld
-
-			# Tools
-			fuzzel
-			btop
-			grim
-			slurp
-			flatpak
-
-			# Apps
-			librewolf
-			nemo
-
-			# Social
-			telegram-desktop
-
-			# Misc
-			spotify
-			pfetch
-			tealdeer
-		];
-
-		file = {
-			".bashrc".source = ./../../../dotfiles/.bashrc;
-			".config/hypr".source = ./../../../dotfiles/hypr;
-		};	
-	};
-	
 	programs = {
 		home-manager.enable = true;
 
@@ -86,4 +46,3 @@ in
 
 	};
 }
-
