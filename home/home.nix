@@ -1,11 +1,8 @@
 { pkgs, self, lib, ... }: 
-let
-	flakeRoot = ./../../..;
-	dotfilesRoot = flakeRoot + /dotfiles;
-in
 {
 	imports = [
 		./programs
+		./hyprland
 	];
 	home = {
 		username = "ropptar";
