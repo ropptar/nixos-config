@@ -26,11 +26,11 @@
 				exec = pkgs.writeShellScript "get_distro" ''
 					DISTRO=`hostnamectl | grep --color=never System`
 					if [[ "$DISTRO" =~ "NixOS" ]]; then
-					    echo ""
+						echo ""
 					elif [[ "$DISTRO" =~ "Arch" ]]; then
-					    echo ""
+						echo ""
 					else 
-					    echo ""
+						echo ""
 					fi
 				'';
 			};
@@ -95,141 +95,124 @@
 			};
 		};
 		style = ''
-			@define-color bg #282828;
-			@define-color fg #ebdbb2;
-			@define-color gray #a89984;
-			@define-color red #fb4934;
-			@define-color red-d #cc241d;
-			@define-color green #b8bb26;
-			@define-color green-d #98971a;
-			@define-color yellow #fabd2f;
-			@define-color yellow-d #d79921;
-			@define-color blue #83a598;
-			@define-color blue-d #458588;
-			@define-color purple #d3869b;
-			@define-color purple-d #b16286;
-			@define-color aqua #8ec07c;
-			@define-color aqua-d #689d6a;
-			@define-color orange #fe8019;
-			@define-color orange-d #d65d0e;
-			
-			
-			window#waybar {
-			    background: transparent;
-			}
-			
-			window#waybar.hidden {
-			    opacity: 0;
-			}
-			
-			/* global */
-			
-			#custom-distro,
-			#window,
-			#submap,
-			#workspaces,
-			#wireplumber,
-			#network,
-			#language,
-			#clock,
-			#tray
-			{
-			    font-size: 18px;
-			    color: @fg;
-			    background: @bg;   
-			    padding: 10px;
-			    margin-top: 10px;
-			    border: none;
-			    border-radius: 10px;
-			    font-family: Hack Nerd Font Propo;
-			    transition: none;
-			    min-height: 20px;
-			}
-			
-			/* fix window title collision */
-			
-			.modules-left {
-			    margin-right: 15px;
-			}
-			
-			.modules-right {
-			    margin-left: 15px;
-			}
-			
-			/* left/rightmost margin*/
-			
-			.modules-left > widget:first-child > #custom-distro {
-			    border: 1px solid @orange;
-			    margin-left: 15px;
-			}
-			
-			.modules-right > widget:last-child > #tray  {
-			    margin-right: 15px;
-			}
-			
-			/* modules-left */
-			
-			#custom-distro {
-			    font-size: 25px;
-			    padding: 0px 9px;
-			    color: @orange;
-			}
-			
-			#window {
-			}
-			
-			#submap {
-			    padding: 5px;
-			    border: 5px solid @red;
-			}
-			
-			/* modules-center */
-			
-			#workspaces {
-			    font-size: 20px;
-			}
-			
-			#workspaces button {
-			    padding: 0px 5px;
-			}
-			
-			#workspaces button.empty {
-			    color: @gray;
-			}
-			
-			#workspaces button.active {
-			    color: @orange;
-			}
-			
-			#workspaces button.special {
-			    padding-left: 4px;
-			    color: @blue;
-			}
-			
-			#workspaces button.urgent {
-			    color: @red;
-			}
-			
-			/* modules-right */
-			
-			#wireplumber {
-			}
-			
-			#wireplumber.muted {
-			    color: @red;
-			}
-			
-			#network {
-			}
-			
-			#language {
-			}
-			
-			#clock {
-			}
-			
-			#tray  {
-			}
-		'';
+@define-color bg #282828;
+@define-color fg #ebdbb2;
+@define-color gray #a89984;
+@define-color red #fb4934;
+@define-color red-d #cc241d;
+@define-color green #b8bb26;
+@define-color green-d #98971a;
+@define-color yellow #fabd2f;
+@define-color yellow-d #d79921;
+@define-color blue #83a598;
+@define-color blue-d #458588;
+@define-color purple #d3869b;
+@define-color purple-d #b16286;
+@define-color aqua #8ec07c;
+@define-color aqua-d #689d6a;
+@define-color orange #fe8019;
+@define-color orange-d #d65d0e;
+
+
+window#waybar {
+	background: transparent;
+}
+
+window#waybar.hidden {
+	opacity: 0;
+}
+
+/* global */
+
+#custom-distro,
+#window,
+#submap,
+#workspaces,
+#wireplumber,
+#network,
+#language,
+#clock,
+#tray
+{
+	font-size: 18px;
+	color: @fg;
+	background: @bg;   
+	padding: 10px;
+	margin-top: 10px;
+	border: none;
+	border-radius: 10px;
+	font-family: Hack Nerd Font Propo;
+	transition: none;
+	min-height: 20px;
+}
+
+/* fix window title collision */
+
+.modules-left {
+	margin-right: 15px;
+}
+
+.modules-right {
+	margin-left: 15px;
+}
+
+/* left/rightmost margin*/
+
+.modules-left > widget:first-child > #custom-distro {
+	border: 1px solid @orange;
+	margin-left: 15px;
+}
+
+.modules-right > widget:last-child > #tray  {
+	margin-right: 15px;
+}
+
+/* modules-left */
+
+#custom-distro {
+	font-size: 25px;
+	padding: 0px 9px;
+	color: @orange;
+}
+
+#submap {
+	padding: 5px;
+	border: 5px solid @red;
+}
+
+/* modules-center */
+
+#workspaces {
+	font-size: 20px;
+}
+
+#workspaces button.empty {
+	color: @gray;
+}
+
+#workspaces button {
+	padding: 0px 5px;
+	color:@fg;
+}
+
+#workspaces button.active {
+	color: @orange;
+}
+
+#workspaces button.special {
+	padding-left: 4px;
+	color: @blue;
+}
+
+#workspaces button.urgent {
+	color: @red;
+}
+
+/* modules-right */
+
+#wireplumber.muted {
+	color: @red;
+}
+'';
 	};
 }
