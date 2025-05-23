@@ -22,7 +22,6 @@
 			flatpak
 
 			# Apps
-			librewolf
 			nemo
 
 			# Social
