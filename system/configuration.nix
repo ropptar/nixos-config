@@ -1,4 +1,4 @@
-{ pkgs, self, lib, ... }: 
+{ pkgs, ... }: 
 {
 	
 	nixpkgs.config.allowUnfree = true;
@@ -11,16 +11,21 @@
 		loader = {
 			systemd-boot = {
 				enable = true;
+				configurationLimit=50;
 				consoleMode = "2";
 				extraEntries = {
 					"arch.conf" = ''
-title	Arch Linux(Zen)
-linux	/vmlinuz-linux-zen
-initrd	/intel-ucode.img
-initrd	/initramfs-linux-zen.img
-options	root=LABEL=DATA rootflags=subvol=@arch rw
+						title	Arch Linux(Zen)
+						sort-key	arch
+						linux	/vmlinuz-linux-zen
+						initrd	/intel-ucode.img
+						initrd	/initramfs-linux-zen.img
+						options	root=LABEL=DATA rootflags=subvol=@arch rw
 					'';
 				};
+				extraInstallCommands = ''
+					${pkgs.gnused}/bin/sed 's/^default\s.*/default\t@saved/' /boot/loader/loader.conf
+				'';
 			};
 			
 			efi.canTouchEfiVariables= true;
