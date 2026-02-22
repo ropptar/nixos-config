@@ -24,7 +24,7 @@
 					'';
 				};
 				extraInstallCommands = ''
-					${pkgs.gnused}/bin/sed 's/^default\s.*/default\t@saved/' /boot/loader/loader.conf
+					${pkgs.gnused}/bin/sed -i 's/^default\s.*/default\t@saved/' /boot/loader/loader.conf
 				'';
 			};
 			
