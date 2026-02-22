@@ -7,41 +7,62 @@
 		home-manager = {
 			url = "github:nix-community/home-manager";
 			inputs.nixpkgs.follows = "nixpkgs";
-
 		};
 
-		nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
-		hm-librewolf-module = {
-			url = "github:nix-community/home-manager?ref=pull/5684/head";
-			flake = false;
+		nur = {
+			url = "github:nix-community/NUR";
+			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
+		firefox-addons = {
+    	  		url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    	  		inputs.nixpkgs.follows = "nixpkgs";
+    		};	
 
 		self.submodules = true;
 	};
 
-	outputs = {self, nixpkgs, home-manager, nixos-hardware, ...} @ inputs:
+	outputs = {self, nixpkgs, home-manager, firefox-addons, nur, ...}@inputs:
 	let
-		lib = nixpkgs.lib;
-	in {
-		nixosConfigurations = {
-			XPS-13-9310 = lib.nixosSystem {
-				specialArgs = {inherit self;};
-				system = "x86_64-linux";
+		homeConfig = { username ? "ropptar" }: {
+			
+			home-manager = {
+				useGlobalPkgs = true;
+				useUserPackages = true;
+				extraSpecialArgs = { inherit inputs firefox-addons; };
+				
+				users.ropptar =  ./home;
+			};
+		};
+
+		hostConfig = { hostname, system ? "x86_64-linux", username ? "ropptar" }: 
+			nixpkgs.lib.nixosSystem {
+				inherit system;
+				specialArgs = { inherit inputs; };
 				modules = [
-					./hosts/XPS-13-9310
-					nixos-hardware.nixosModules.dell-xps-13-9310
-					home-manager.nixosModules.home-manager
+					./hosts/${hostname}
 					{
-						home-manager.extraSpecialArgs = {inherit self;};
-						home-manager.useUserPackages = true;
-						home-manager.useGlobalPkgs = true;
-						home-manager.backupFileExtension = "backup";
-						home-manager.users.ropptar = import ./home/home.nix;
+						networking.hostName = hostname;	
+						users.users.${username} = {
+							isNormalUser = true;
+							home = "/home/${username}";
+						};
 					}
+					home-manager.nixosModules.home-manager
+					( homeConfig { username=username; })
+
+					{ nixpkgs.overlays = [ inputs.nur.overlays.default ]; }
 				];
 			};
+	in {
+		nixosConfigurations = {
+			blackno1 = hostConfig { hostname = "blackno1"; };
+		};
+
+		homeConfigurations.ropptar = home-manager.lib.homeConfiguration {
+			pkgs = nixpkgs.legacyPackages.x86_64-linux;
+			extraSpecialArgs = { inherit inputs firefox-addons; };
+			modules = [ ./home ];
 		};
 	};
 }
