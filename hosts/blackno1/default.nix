@@ -1,9 +1,8 @@
-{ inputs, ... }:
+{ ... }:
 
 {
-	imports = [
-		./hardware-configuration.nix
-		./system.nix
-		../../system
-	];
+  imports = [
+    ./hardware-configuration.nix
+    ./roles.nix
+  ];
 }

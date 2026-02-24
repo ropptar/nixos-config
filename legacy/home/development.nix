@@ -43,6 +43,10 @@
           "extensions.autoCheckUpdates" = false;
           "extensions.autoUpdate" = false;
           "update.mode" = "none";
+          "extensions.experimental.affinity" =
+            {
+              "asvetliakov.vscode-neovim" = 1;
+            };
 
           "C_Cpp.clang_format_style" = "file";
           "C_Cpp.autocomplete" = "default";
