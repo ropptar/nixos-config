@@ -31,8 +31,8 @@
       };
 
       baseModules = [
-        ./modules
         ./options.nix
+        ./modules
       ];
 
       mkHome = { hostname, system ? "x86_64-linux", username ? "ropptar" }:
@@ -54,10 +54,15 @@
       mkHost = { hostname, system ? "x86_64-linux", username ? "ropptar" }:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; pkgs = pkgsFor system; };
+          specialArgs = { inherit inputs; };
           modules = baseModules ++ [
             ./hosts/${hostname}
             {
+              nixpkgs.pkgs = import inputs.nixpkgs{
+                #inherit (nixpkgs.lib) system;
+                config.allowUnfree = true;
+                overlays = [ inputs.nur.overlays.default ];
+              };
               networking.hostName = hostname;
               users.users.${username} = {
                 isNormalUser = true;

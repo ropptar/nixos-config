@@ -18,17 +18,20 @@ let
     inherit default description;
   };
 
-  optList = { type ? lib.types.str, default ? [ ], description }:
+  optList = type ? "str": default ? [ ]: description ? null:
     let
       elemType = {
         str = lib.types.str;
         int = lib.types.int;
         pkg = lib.types.package;
       }.${type} or builtins.throw "List of ${type} support not implemented";
+      desc = if description != null
+             then "${description} [${type}]"
+             else "List of ${type} values"
     in
     opt {
       type = lib.types.listOf elemType;
-      inherit default description;
+      inherit default desc;
     };
 in
 {

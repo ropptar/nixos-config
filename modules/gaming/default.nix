@@ -5,7 +5,7 @@ let
   isNixOS = builtins.hasAttr "system" config;
 in
 {
-  imports = lib.optionals (cfg.enable) [
+  imports = [
     ./steam.nix
   ];
   config = lib.mkIf cfg.enable (lib.mkMerge [
